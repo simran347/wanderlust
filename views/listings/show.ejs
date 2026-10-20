@@ -1,4 +1,5 @@
 <% layout("/layouts/boilerplate") %>
+<% const listingUser = typeof currUser === "undefined" ? null : currUser; %>
 
     <script>
         const mapToken = <%- JSON.stringify(process.env.MAP_TOKEN || "") %>;
@@ -37,7 +38,7 @@
             </div>
 
             <br>
-            <% if(currUser && listing.owner._id.equals(currUser._id)) { %>
+            <% if(listingUser && listing.owner._id.equals(listingUser._id)) { %>
                 <div class="btns d-flex">
                     <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark col-1 offset-3 edit-btn">Edit</a>
 
@@ -52,7 +53,7 @@
 
                     <div class="col-8 offset-3 mb-3">
 
-                        <% if(currUser) {%>
+                        <% if(listingUser) {%>
                             <hr>
                             <h4>Leave a review</h4>
                             <form action="/listings/<%= listing.id %>/reviews" method="POST" novalidate
